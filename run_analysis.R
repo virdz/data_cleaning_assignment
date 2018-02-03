@@ -1,8 +1,11 @@
+## This script is to read, merge and filter data from a smartphone recorded while a experiment.
+
+## initialize environment
 setwd("D:\\Workspace/coursera/data cleaning/ProgrammingAssignment/")
 library(dplyr)
 rm(list = ls())
 
-
+## read the data into particular DFs
 #unzip("UCI HAR Dataset.zip")
 test.x <- read.table("UCI HAR Dataset/test/X_test.txt")
 test.y <- read.table("UCI HAR Dataset/test/y_test.txt")
@@ -24,13 +27,16 @@ data <- union(train,test)
 names(data)[1:2] <- c("subject", "activityID")
 step1 <- data
 rm(list = c(ls(pattern = "train"), ls(pattern = "test")))
+
 # Extracts only the measurements on the mean and standard deviation for each measurement.
 step2 <- data[,c(F,F,grepl("mean|std", featurenames$featureName))]
 
 # Uses descriptive activity names to name the activities in the data set
 data <- step3 <- merge(data, activitylables)
+
 # Appropriately labels the data set with descriptive variable names.
 names(data)[1:length(c(names(data)[1:2], as.character.factor(featurenames[[2]])))] <- c(names(data)[1:2], as.character.factor(featurenames[[2]]))
+
 # From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 spl <- data[-c(1,2,564)]
 spl <- split(spl, list(data$subject,data$activityLable))
