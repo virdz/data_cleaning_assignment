@@ -38,8 +38,8 @@ data <- step3 <- merge(data, activitylables)
 names(data)[1:length(c(names(data)[1:2], as.character.factor(featurenames[[2]])))] <- c(names(data)[1:2], as.character.factor(featurenames[[2]]))
 
 # From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-spl <- data[-c(1,2,564)]
-spl <- split(spl, list(data$subject,data$activityLable))
-step4<- sapply(X = spl, FUN = sapply, function(X){mean(X[1])})
-step4 <- as.data.frame(t(means))
+step4 <- aggregate(data[-c(1,2,564)], by = list(subject = data$subject, activityID = data$activityLable), FUN = mean)
+
+# Output for submission
+write.table(x = step4, file = "submission.txt", col.names = F)
 
