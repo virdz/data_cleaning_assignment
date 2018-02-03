@@ -25,6 +25,7 @@ test <- data.frame(test.subject, test.y, test.x)
 data <- union(train,test)
 names(data)[1:2] <- c("subject", "activityID")
 step1 <- data
+print(step1)
 rm(list = c(ls(pattern = "train"), ls(pattern = "test")))
 
 # Extracts only the measurements on the mean and standard deviation for each measurement.
