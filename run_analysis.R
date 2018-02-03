@@ -1,22 +1,21 @@
 ## This script is to read, merge and filter data from a smartphone recorded while a experiment.
 
 ## initialize environment
-setwd("D:\\Workspace/coursera/data cleaning/ProgrammingAssignment/")
 library(dplyr)
 rm(list = ls())
 
 ## read the data into particular DFs
 #unzip("UCI HAR Dataset.zip")
-test.x <- read.table("UCI HAR Dataset/test/X_test.txt")
-test.y <- read.table("UCI HAR Dataset/test/y_test.txt")
-train.y <- read.table("UCI HAR Dataset/train/y_train.txt")
-train.x <- read.table("UCI HAR Dataset/train/X_train.txt")
-train.subject <- read.table("UCI HAR Dataset/train/subject_train.txt")
-test.subject <- read.table("UCI HAR Dataset/test/subject_test.txt")
+test.x <- read.table("X_test.txt")
+test.y <- read.table("y_test.txt")
+train.y <- read.table("y_train.txt")
+train.x <- read.table("X_train.txt")
+train.subject <- read.table("subject_train.txt")
+test.subject <- read.table("subject_test.txt")
 
-activitylables<- read.table("UCI HAR Dataset/activity_labels.txt", sep = " ", header = F)
+activitylables<- read.table("activity_labels.txt", sep = " ", header = F)
 names(activitylables) <- c("activityID","activityLable")
-featurenames <- read.table("UCI HAR Dataset/features.txt")
+featurenames <- read.table("features.txt")
 names(featurenames) <- c("featureIdx","featureName")
 
 # Merges the training and the test sets to create one data set.
