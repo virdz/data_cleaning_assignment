@@ -35,6 +35,9 @@ step2 <- data[,c(F,F,grepl("mean|std", featurenames$featureName))]
 data <- step3 <- merge(data, activitylables)
 
 # Appropriately labels the data set with descriptive variable names.
+featurenames$featureName <- gsub("^t", "time_", featurenames$featureName)
+featurenames$featureName <- gsub("Acc", "Accelerator", featurenames$featureName
+                                 
 names(data)[1:length(c(names(data)[1:2], as.character.factor(featurenames[[2]])))] <- c(names(data)[1:2], as.character.factor(featurenames[[2]]))
 
 # From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
