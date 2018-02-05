@@ -1,6 +1,7 @@
 ## This script is to read, merge and filter data from a smartphone recorded while a experiment.
 
 ## initialize environment
+#setwd("D:\\Workspace/coursera/data cleaning/ProgrammingAssignment/data_cleaning_assignment/")
 library(dplyr)
 rm(list = ls())
 
@@ -25,7 +26,6 @@ test <- data.frame(test.subject, test.y, test.x)
 data <- union(train,test)
 names(data)[1:2] <- c("subject", "activityID")
 step1 <- data
-print(step1)
 rm(list = c(ls(pattern = "train"), ls(pattern = "test")))
 
 # Extracts only the measurements on the mean and standard deviation for each measurement.
@@ -36,13 +36,16 @@ data <- step3 <- merge(data, activitylables)
 
 # Appropriately labels the data set with descriptive variable names.
 featurenames$featureName <- gsub("^t", "time_", featurenames$featureName)
-featurenames$featureName <- gsub("Acc", "Accelerator", featurenames$featureName
+featurenames$featureName <- gsub("Acc", "Accelerator", featurenames$featureName)
+featurenames$featureName <- gsub("std", "StandardDeviation", featurenames$featureName)
+featurenames$featureName <- gsub("min", "Minimum", featurenames$featureName)
+featurenames$featureName <- gsub("max", "Maximum", featurenames$featureName)
                                  
-names(data)[1:length(c(names(data)[1:2], as.character.factor(featurenames[[2]])))] <- c(names(data)[1:2], as.character.factor(featurenames[[2]]))
+names(data)[1:length(c(names(data)[1:2], featurenames[[2]]))] <- c(names(data)[1:2], featurenames[[2]])
 
 # From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 step4 <- aggregate(data[-c(1,2,564)], by = list(subject = data$subject, activityID = data$activityLable), FUN = mean)
 
 # Output for submission
-write.table(x = step4, file = "submission.txt", col.names = F)
+write.table(x = step4, file = "submission.txt", row.names = F)
 
