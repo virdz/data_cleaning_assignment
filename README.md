@@ -29,16 +29,12 @@ From the data set in step 4, creates a second, independent tidy data set with th
 This script is divided into 
 
 * Initialization,
-
 * Extraction,
-
 * Transformation and
-
 * several filtrations
 
 ### Initialization
-load the required librarys 
-
+load the required librarys
 clear the environment.
 
 ### Extraction
